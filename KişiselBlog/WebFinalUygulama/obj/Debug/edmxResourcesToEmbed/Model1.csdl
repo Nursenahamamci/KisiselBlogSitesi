@@ -1,0 +1,84 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="blogModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Kullanici">
+    <Key>
+      <PropertyRef Name="KullaniciNo" />
+    </Key>
+    <Property Name="KullaniciNo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="KullaniciAdSoyad" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+    <Property Name="KullaniciAdres" Type="String" MaxLength="75" FixedLength="false" Unicode="false" />
+    <Property Name="KullaniciAdi" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Sifre" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Yorum" Relationship="Self.FK__Yorum__Kullanici__25869641" FromRole="Kullanici" ToRole="Yorum" />
+  </EntityType>
+  <EntityType Name="Siir">
+    <Key>
+      <PropertyRef Name="SiirNo" />
+    </Key>
+    <Property Name="SiirNo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SiirBaslik" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="SiirMetni" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+    <Property Name="SiirTarihi" Type="DateTime" Precision="3" />
+    <Property Name="YorumNo" Type="Int32" />
+    <NavigationProperty Name="Yorum" Relationship="Self.FK__Siir__YorumNo__286302EC" FromRole="Siir" ToRole="Yorum" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="Yorum">
+    <Key>
+      <PropertyRef Name="YorumNo" />
+    </Key>
+    <Property Name="YorumNo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="YorumDetay" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="YorumTarih" Type="DateTime" Precision="3" />
+    <Property Name="KullaniciNo" Type="Int32" />
+    <NavigationProperty Name="Kullanici" Relationship="Self.FK__Yorum__Kullanici__25869641" FromRole="Yorum" ToRole="Kullanici" />
+    <NavigationProperty Name="Siir" Relationship="Self.FK__Siir__YorumNo__286302EC" FromRole="Yorum" ToRole="Siir" />
+  </EntityType>
+  <Association Name="FK__Yorum__Kullanici__25869641">
+    <End Role="Kullanici" Type="Self.Kullanici" Multiplicity="0..1" />
+    <End Role="Yorum" Type="Self.Yorum" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Kullanici">
+        <PropertyRef Name="KullaniciNo" />
+      </Principal>
+      <Dependent Role="Yorum">
+        <PropertyRef Name="KullaniciNo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Siir__YorumNo__286302EC">
+    <End Role="Yorum" Type="Self.Yorum" Multiplicity="0..1" />
+    <End Role="Siir" Type="Self.Siir" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Yorum">
+        <PropertyRef Name="YorumNo" />
+      </Principal>
+      <Dependent Role="Siir">
+        <PropertyRef Name="YorumNo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="blogEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Kullanici" EntityType="Self.Kullanici" />
+    <EntitySet Name="Siir" EntityType="Self.Siir" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+    <EntitySet Name="Yorum" EntityType="Self.Yorum" />
+    <AssociationSet Name="FK__Yorum__Kullanici__25869641" Association="Self.FK__Yorum__Kullanici__25869641">
+      <End Role="Kullanici" EntitySet="Kullanici" />
+      <End Role="Yorum" EntitySet="Yorum" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Siir__YorumNo__286302EC" Association="Self.FK__Siir__YorumNo__286302EC">
+      <End Role="Yorum" EntitySet="Yorum" />
+      <End Role="Siir" EntitySet="Siir" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

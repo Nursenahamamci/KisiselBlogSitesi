@@ -1,0 +1,29 @@
+﻿@model List<WebFinalUygulama.Siir>
+@{
+    ViewBag.Title = "Anasayfa";
+    Layout = "~/Views/Shared/_siteLayout.cshtml";
+}
+
+<div>
+
+    <h1>Şiirler</h1>
+    
+    @foreach (var siir in Model)
+    {
+        <h3><b>@siir.SiirBaslik</b></h3> <br/>
+        @siir.SiirBirinciSatir <br />
+        @siir.SiirIkinciSatir <br />
+        @siir.SiiUcuncuSatir <br />
+        @siir.SiirDorduncuSatir <br />
+        <form method="post" action="/Home/SiirSil"> 
+            <div class="col-md-12">
+                <input type="hidden" value="@siir.SiirNo" name="SiirNo"/> 
+                <button type="submit" class="btn btn-danger">
+                <i class="active"></i> Şiiri Sil </button>
+            </div> <br />
+        </form>
+        
+    }
+    <br />
+
+</div>

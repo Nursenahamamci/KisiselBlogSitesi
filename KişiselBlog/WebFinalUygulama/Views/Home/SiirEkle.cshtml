@@ -1,0 +1,40 @@
+﻿
+@{
+    ViewBag.Title = "SiirEkle";
+    Layout = "~/Views/Shared/_siteLayout.cshtml";
+}
+
+<form method="post" action="/Home/SiirYaz">
+
+    <div class="panel panel-group" >
+
+        <div class="panel-heading">
+            <h3>Şiir Ekleme </h3>
+        </div>
+        <div class="panel-body">
+
+            <div class="col-md-12">
+                <input class="form-control" autocomplete="off" type="text" placeholder="Şiir Başlığı Giriniz" name="SiirBaslik" />
+            </div>
+            <div class="col-md-12">
+                <input class="form-control" autocomplete="off" type="text" placeholder="" name="SiirBirinciSatir" />
+            </div>
+            <div class="col-md-12">
+                <input class="form-control" autocomplete="off" type="text" placeholder="" name="SiirIkinciSatir" />
+            </div>
+            <div class="col-md-12">
+                <input class="form-control" autocomplete="off" type="text" placeholder="" name="SiiUcuncuSatir" />
+            </div>
+            <div class="col-md-12">
+                <input class="form-control" autocomplete="off" type="text" placeholder="" name="SiirDorduncuSatir" />
+            </div>
+
+            <div class="col-md-12">
+                <input type="submit" class="btn btn-primary" value="Gönder" />
+            </div>
+
+        </div>
+
+    </div>
+
+</form>

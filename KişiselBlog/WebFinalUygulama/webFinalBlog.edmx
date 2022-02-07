@@ -1,0 +1,219 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="blogModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Kullanici">
+          <Key>
+            <PropertyRef Name="KullaniciNo" />
+          </Key>
+          <Property Name="KullaniciNo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="KullaniciAdSoyad" Type="varchar" MaxLength="60" />
+          <Property Name="KullaniciAdres" Type="varchar" MaxLength="75" />
+          <Property Name="KullaniciAdi" Type="varchar" MaxLength="50" />
+          <Property Name="Sifre" Type="varchar" MaxLength="30" />
+        </EntityType>
+        <EntityType Name="Siir">
+          <Key>
+            <PropertyRef Name="SiirNo" />
+          </Key>
+          <Property Name="SiirNo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SiirBaslik" Type="varchar" MaxLength="50" />
+          <Property Name="SiirBirinciSatir" Type="varchar" MaxLength="300" />
+          <Property Name="SiirIkinciSatir" Type="varchar" MaxLength="300" />
+          <Property Name="SiiUcuncuSatir" Type="varchar" MaxLength="300" />
+          <Property Name="SiirDorduncuSatir" Type="varchar" MaxLength="300" />
+          <Property Name="SiirTarihi" Type="datetime" />
+          <Property Name="YorumNo" Type="int" />
+        </EntityType>
+        <EntityType Name="Yorum">
+          <Key>
+            <PropertyRef Name="YorumNo" />
+          </Key>
+          <Property Name="YorumNo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="YorumDetay" Type="varchar" MaxLength="250" />
+          <Property Name="YorumTarih" Type="datetime" />
+          <Property Name="KullaniciNo" Type="int" />
+        </EntityType>
+        <Association Name="FK__Siir__YorumNo__286302EC">
+          <End Role="Yorum" Type="Self.Yorum" Multiplicity="0..1" />
+          <End Role="Siir" Type="Self.Siir" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Yorum">
+              <PropertyRef Name="YorumNo" />
+            </Principal>
+            <Dependent Role="Siir">
+              <PropertyRef Name="YorumNo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Yorum__Kullanici__25869641">
+          <End Role="Kullanici" Type="Self.Kullanici" Multiplicity="0..1" />
+          <End Role="Yorum" Type="Self.Yorum" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kullanici">
+              <PropertyRef Name="KullaniciNo" />
+            </Principal>
+            <Dependent Role="Yorum">
+              <PropertyRef Name="KullaniciNo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="blogModelStoreContainer">
+          <EntitySet Name="Kullanici" EntityType="Self.Kullanici" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Siir" EntityType="Self.Siir" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Yorum" EntityType="Self.Yorum" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Siir__YorumNo__286302EC" Association="Self.FK__Siir__YorumNo__286302EC">
+            <End Role="Yorum" EntitySet="Yorum" />
+            <End Role="Siir" EntitySet="Siir" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Yorum__Kullanici__25869641" Association="Self.FK__Yorum__Kullanici__25869641">
+            <End Role="Kullanici" EntitySet="Kullanici" />
+            <End Role="Yorum" EntitySet="Yorum" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="blogModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Kullanici">
+          <Key>
+            <PropertyRef Name="KullaniciNo" />
+          </Key>
+          <Property Name="KullaniciNo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="KullaniciAdSoyad" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+          <Property Name="KullaniciAdres" Type="String" MaxLength="75" FixedLength="false" Unicode="false" />
+          <Property Name="KullaniciAdi" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Sifre" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Yorum" Relationship="Self.FK__Yorum__Kullanici__25869641" FromRole="Kullanici" ToRole="Yorum" />
+        </EntityType>
+        <EntityType Name="Siir">
+          <Key>
+            <PropertyRef Name="SiirNo" />
+          </Key>
+          <Property Name="SiirNo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SiirBaslik" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="SiirBirinciSatir" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="SiirIkinciSatir" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="SiiUcuncuSatir" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="SiirDorduncuSatir" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="SiirTarihi" Type="DateTime" Precision="3" />
+          <Property Name="YorumNo" Type="Int32" />
+          <NavigationProperty Name="Yorum" Relationship="Self.FK__Siir__YorumNo__286302EC" FromRole="Siir" ToRole="Yorum" />
+        </EntityType>
+        <EntityType Name="Yorum">
+          <Key>
+            <PropertyRef Name="YorumNo" />
+          </Key>
+          <Property Name="YorumNo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="YorumDetay" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="YorumTarih" Type="DateTime" Precision="3" />
+          <Property Name="KullaniciNo" Type="Int32" />
+          <NavigationProperty Name="Kullanici" Relationship="Self.FK__Yorum__Kullanici__25869641" FromRole="Yorum" ToRole="Kullanici" />
+          <NavigationProperty Name="Siir" Relationship="Self.FK__Siir__YorumNo__286302EC" FromRole="Yorum" ToRole="Siir" />
+        </EntityType>
+        <Association Name="FK__Yorum__Kullanici__25869641">
+          <End Role="Kullanici" Type="Self.Kullanici" Multiplicity="0..1" />
+          <End Role="Yorum" Type="Self.Yorum" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kullanici">
+              <PropertyRef Name="KullaniciNo" />
+            </Principal>
+            <Dependent Role="Yorum">
+              <PropertyRef Name="KullaniciNo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Siir__YorumNo__286302EC">
+          <End Role="Yorum" Type="Self.Yorum" Multiplicity="0..1" />
+          <End Role="Siir" Type="Self.Siir" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Yorum">
+              <PropertyRef Name="YorumNo" />
+            </Principal>
+            <Dependent Role="Siir">
+              <PropertyRef Name="YorumNo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="blogEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Kullanici" EntityType="Self.Kullanici" />
+          <EntitySet Name="Siir" EntityType="Self.Siir" />
+          <EntitySet Name="Yorum" EntityType="Self.Yorum" />
+          <AssociationSet Name="FK__Yorum__Kullanici__25869641" Association="Self.FK__Yorum__Kullanici__25869641">
+            <End Role="Kullanici" EntitySet="Kullanici" />
+            <End Role="Yorum" EntitySet="Yorum" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Siir__YorumNo__286302EC" Association="Self.FK__Siir__YorumNo__286302EC">
+            <End Role="Yorum" EntitySet="Yorum" />
+            <End Role="Siir" EntitySet="Siir" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="blogModelStoreContainer" CdmEntityContainer="blogEntities1">
+          <EntitySetMapping Name="Kullanici">
+            <EntityTypeMapping TypeName="blogModel.Kullanici">
+              <MappingFragment StoreEntitySet="Kullanici">
+                <ScalarProperty Name="KullaniciNo" ColumnName="KullaniciNo" />
+                <ScalarProperty Name="KullaniciAdSoyad" ColumnName="KullaniciAdSoyad" />
+                <ScalarProperty Name="KullaniciAdres" ColumnName="KullaniciAdres" />
+                <ScalarProperty Name="KullaniciAdi" ColumnName="KullaniciAdi" />
+                <ScalarProperty Name="Sifre" ColumnName="Sifre" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Siir">
+            <EntityTypeMapping TypeName="blogModel.Siir">
+              <MappingFragment StoreEntitySet="Siir">
+                <ScalarProperty Name="SiirNo" ColumnName="SiirNo" />
+                <ScalarProperty Name="SiirBaslik" ColumnName="SiirBaslik" />
+                <ScalarProperty Name="SiirBirinciSatir" ColumnName="SiirBirinciSatir" />
+                <ScalarProperty Name="SiirIkinciSatir" ColumnName="SiirIkinciSatir" />
+                <ScalarProperty Name="SiiUcuncuSatir" ColumnName="SiiUcuncuSatir" />
+                <ScalarProperty Name="SiirDorduncuSatir" ColumnName="SiirDorduncuSatir" />
+                <ScalarProperty Name="SiirTarihi" ColumnName="SiirTarihi" />
+                <ScalarProperty Name="YorumNo" ColumnName="YorumNo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Yorum">
+            <EntityTypeMapping TypeName="blogModel.Yorum">
+              <MappingFragment StoreEntitySet="Yorum">
+                <ScalarProperty Name="YorumNo" ColumnName="YorumNo" />
+                <ScalarProperty Name="YorumDetay" ColumnName="YorumDetay" />
+                <ScalarProperty Name="YorumTarih" ColumnName="YorumTarih" />
+                <ScalarProperty Name="KullaniciNo" ColumnName="KullaniciNo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

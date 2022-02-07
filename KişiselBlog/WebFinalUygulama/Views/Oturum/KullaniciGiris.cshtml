@@ -1,0 +1,63 @@
+﻿
+@{
+    ViewBag.Title = "KullaniciGiris";
+    Layout = "~/Views/Shared/_siteLayout.cshtml";
+}
+
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Giris</title>
+    <link href="~/css/bootstrap.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="row panel">
+        <div class="panel-body col-md-6">
+            <div class="panel-heading">
+                <h3>Yönetici Oturum Aç</h3>
+            </div>
+            <form method="post" action="/Oturum/OturumAc">
+
+                <div class="col-md-12">
+                    <input type="text" name="KullaniciAdi" placeholder="Kullanıcı Adı Giriniz" />
+                </div>
+                <div class="col-md-12">
+                    <input type="password" name="Sifre" placeholder="Parola giriniz" />
+                </div>
+                <div class="col-md-12">
+                    <input type="submit" value="Oturum Aç" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+
+
+        <div class="panel-body col-md-6">
+            <div class="panel-heading">
+                <h3>Yeni Yönetici Kaydı</h3>
+            </div>
+            <form method="post" action="/Oturum/Kaydol">
+
+                <div class="col-md-12">
+                    <input type="text" name="KullaniciAdSoyad" placeholder="Ad Soyad Giriniz" />
+                </div>
+                <div class="col-md-12">
+                    <input type="text" name="KullaniciAdres" placeholder="Adres Giriniz" />
+                </div>
+                <div class="col-md-12">
+                    <input type="text" name="KullaniciAdi" placeholder="Kullanıcı Adı Giriniz" />
+                </div>
+                <div class="col-md-12">
+                    <input type="password" name="Sifre" placeholder="Şifre Giriniz" />
+                </div>
+                <div class="col-md-12">
+                    <input type="submit" value="Kaydol" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
+

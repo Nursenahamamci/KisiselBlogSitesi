@@ -1,0 +1,41 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>vize</title>
+    <link href="~/css/bootstrap.css" rel="stylesheet" />
+</head>
+<body class="container">
+    <div class="nav" style="background-color:LightSkyBlue">
+        <div class="col-md-2 text-center">
+            <a href="@Url.Action("../Home/SiirEkle")"><h4>Şiir Yazmak İçin Tıklayınız</h4></a>
+        </div>
+        <div class="col-md-8 text-center" style="background-color:cadetblue">
+            <h1>Şiirler Blog Sitesi</h1>
+        </div>
+
+        <div class="col-md-2 text-center">
+            <a href="@Url.Action("../Oturum/KullaniciGiris")"><h5>Kullanıcı Girişi</h5></a>
+        </div>
+        <div class="col-md-2 text-center">  
+            <a href="@Url.Action("../Oturum/CikisYap")"><h5>Çıkış Yap</h5></a>
+        </div>
+    </div>
+
+    <div class="icerik container">
+        @RenderBody()
+    </div>
+   
+    <div class="nav altlik" style="background-color:LightSkyBlue">
+        <div class="col-md-6">
+            <a href="@Url.Action("../Home/Anasayfa")"><h4>Anasayfa</h4></a>
+        </div>
+        <div class="col-md-6">
+            <h5 class="pull-right">Tasarım: nrsenacng</h5>
+            <div />
+        </div>
+</body>
+</html>
